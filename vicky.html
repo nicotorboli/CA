@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuentra tu regalo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 50px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ff4081;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #333;
+            animation: fadeIn 3s ease-in-out;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+        button:hover {
+            background-color: #e91e63;
+            transform: scale(1.1);
+        }
+        .instrucciones {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            text-align: left;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .opciones {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .opciones button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .opciones button:hover {
+            background-color: #e91e63;
+        }
+        .gif-container {
+            margin: 20px 0;
+        }
+        .gif-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .hidden { display: none; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body>
+    <h1>¡Hola, mi amor!</h1>
+    <p>Presiona el botón para descubrir cómo encontrar tu regalo.</p>
+    <button onclick="mostrarInstrucciones()">Presiona aquí</button>
+
+    <div id="instrucciones" class="instrucciones">
+        <div class="gif-container">
+            <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExamVhaXBnNWpnM3JpcXlhN2Z1aHo4NG9kazgwNGpsZml3b29mcmZnYSZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9Zw/OmK8lulOMQ9XO/giphy.gif" alt="GIF divertido">
+        </div>
+        <p id="pista1">¿Cuál es el objeto que muevo usualmente cuando me quedo a dormir?</p>
+        <div class="opciones" id="opciones1">
+            <button onclick="elegirOpcion('mesita')">La mesita de luz</button>
+            <button onclick="elegirOpcion('ventana')">La ventana</button>
+        </div>
+        <div class="gif-container hidden" id="nuevoGif">
+            <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="GIF nuevo">
+        </div>
+        <p id="pista2" class="hidden">Biennn, Ahora en la mesita hay varias cosas, busca el objeto del color de ropa de tu personaje favorito de HxH.</p>
+        <div class="opciones hidden" id="opciones2">
+            <button onclick="elegirColor('verde')">Verde</button>
+            <button onclick="elegirColor('naranja')">Naranja Metalizado</button>
+        </div>
+        <div class="gif-container hidden" id="gifFinal">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTFiMGZiMGpsaXRxZWE1azI5dWxlcXRuMm15a2I0ZWI1aTF3cWhrbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vVegyymxA90fkY8jkE/giphy.gif" alt="GIF de victoria">
+            <p><strong>¡Abri la caja y ahí está tu regalo! Espero que te guste. 🎁💖</strong></p>
+            <p><strong>Feliz San Valentin :DDDDD</strong></p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarInstrucciones() {
+            document.getElementById('instrucciones').style.display = 'block';
+        }
+
+        function elegirOpcion(opcion) {
+    if (opcion === 'mesita') {
+        document.getElementById('pista2').classList.remove('hidden');
+        document.getElementById('nuevoGif').classList.remove('hidden');
+        document.getElementById('opciones2').classList.remove('hidden');
+    } else {
+        mostrarError('pista1');
+    }
+}
+
+function elegirColor(color) {
+    if (color === 'verde') {
+        document.getElementById('gifFinal').classList.remove('hidden');
+    } else {
+        mostrarError('pista2');
+    }
+}
+
+function mostrarError(pista) {
+    let gifUrl, mensaje;
+
+    if (pista === 'pista1') {
+        gifUrl = 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjkxYm1uZzl1Y2hsZmgyd2F1dndqemhneGFmMDc5aW15MTYwbW04cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7ygVM8vWhlkEo/giphy.gif'; // GIF de error para pista 1
+        mensaje = 'Como voy a mover la ventana?, bonita';
+    } else {
+        gifUrl = 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmo5ZjhuY29pMzJvNDBiamx5YWU3NWhoZGI1cXhvZHZ2dDdhZWxseSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2x0VePimPaFJDpGZ7H/giphy.gif'; // GIF de error para pista 2
+        mensaje = 'estaba seguro que tu personaje favorito era Gon...!';
+    }
+
+    let errorContainer = document.createElement('div');
+    errorContainer.classList.add('gif-container');
+    errorContainer.innerHTML = `<img src="${gifUrl}" alt="GIF error"><p><strong>${mensaje}</strong></p>`;
+    
+    document.body.appendChild(errorContainer);
+
+    setTimeout(() => {
+        errorContainer.remove(); // En lugar de recargar la página, elimina el mensaje de error después de 5 segundos
+    }, 5000);
+}
+    </script>
+</body>
+</html>
